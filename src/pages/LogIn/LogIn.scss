@@ -1,0 +1,23 @@
+.LogIn {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__registration {
+    margin-top: 15px;
+  }
+}
+
+.ant-form {
+  width: 400px;
+}
+.login-form-forgot {
+  float: right;
+}
+ .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+ .login-form-button {
+  width: 100%;
+}

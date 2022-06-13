@@ -1,0 +1,17 @@
+.card {
+  width: 228px;
+  height: 144px;
+  //background-blend-mode: multiply;
+  border-radius: 20px;
+  &__text  {
+    //font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #FFFFFF;
+
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+}

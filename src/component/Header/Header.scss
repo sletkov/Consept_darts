@@ -1,0 +1,15 @@
+.header{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 20px;
+  &__info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+.ant-btn {
+  margin-right: 10px;
+}
