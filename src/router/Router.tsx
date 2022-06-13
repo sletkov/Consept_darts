@@ -2,7 +2,7 @@ import React from "react";
 import {Route, Routes} from "react-router-dom";
 import {TimelinePage} from "../pages/TimelinePage/TimelinePage";
 import {ProfilePage} from "../pages/ProfilePage/ProfilePage";
-import {LogIn} from "../pages/LogIn/LogIn";
+import { AuthPage } from "../pages/AuthPage/AuthPage";
 
 export const Router = () => {
   return (
@@ -17,7 +17,7 @@ export const Router = () => {
       />
       <Route
           path={'/auth'}
-          element = {<LogIn />}
+          element = {<AuthPage />}
       />
     </Routes>
   )

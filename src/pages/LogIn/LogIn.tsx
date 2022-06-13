@@ -5,7 +5,6 @@ import './LogIn.scss'
 import {NavLink} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {identification} from "../../store/actions/authActions";
-import any = jasmine.any;
 
 export const LogIn = () => {
 
