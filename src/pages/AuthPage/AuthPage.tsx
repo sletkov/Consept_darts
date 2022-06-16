@@ -1,22 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AuthPageContainerTypes, LoginFormTypes} from "./types";
 import {LoginContainer} from "./components/LoginContainer";
 import {RegisterContainer} from "./components/RegisterContainer";
 import {useDispatch} from "react-redux";
 import {login} from "../../store/actions/authActions";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import './AuthPage.scss'
 
 export const AuthPage = () => {
 
   const dispatch: any = useDispatch()
   const navigate = useNavigate()
+  const location: any = useLocation()
 
   const [currentContainer, setCurrentContainer] = useState<AuthPageContainerTypes>(AuthPageContainerTypes.Login)
 
+  useEffect(() => {
+    if (location.state) {
+      setCurrentContainer(location.state.option)
+    }
+  }, [location])
+
   const handleSubmit = (values: LoginFormTypes) => {
     dispatch(login(values))
-    navigate('/')
+    navigate('/timeline')
   }
 
   return (

@@ -1,4 +1,4 @@
 import React from 'react';
-import {Layout} from "./containers/Layout/Layout";
+import {Router} from "./router/Router";
 
-export const App = () => <Layout />
+export const App = () => <Router />

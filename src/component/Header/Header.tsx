@@ -4,9 +4,12 @@ import { SearchOutlined } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import './Header.scss'
-import { NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {AuthPageContainerTypes} from "../../pages/AuthPage/types";
 export const Header = () => {
+
+  const navigate = useNavigate()
 
     const [ active, setActive ] = useState("btn1");
 
@@ -15,6 +18,11 @@ export const Header = () => {
     const ChangeActive= (btn:string) => {
         setActive(btn)
     }
+
+  const handleNavigate = (option: AuthPageContainerTypes) => {
+    console.log(option)
+    navigate('/auth', {state: {option}})
+  }
 
     return(
         <div className={'header'}>
@@ -27,11 +35,11 @@ export const Header = () => {
             <div className={'header__menu'}>
                 {active === 'btn1'
                     ? <Button type={'primary'} onClick={() => ChangeActive("btn1")}>
-                        <NavLink to={'/'}>Лента</NavLink>
+                        <NavLink to={'/timeline'}>Лента</NavLink>
                     </Button>
                     :
                     <Button onClick={() => ChangeActive("btn1")}>
-                        <NavLink to={'/'}>Лента</NavLink>
+                        <NavLink to={'/timeline'}>Лента</NavLink>
                     </Button>
                 }
                 {active === 'btn2'
@@ -61,8 +69,8 @@ export const Header = () => {
                     <Avatar size={40} icon={<UserOutlined />} />
                 </div>
                     : <div className={'header__link'}>
-                        <Button type="link" >Войти</Button>
-                        <Button type="link" >Зарегистрироваться</Button>
+                      <Button type={'link'} onClick={() => handleNavigate(AuthPageContainerTypes.Login)}>Войти</Button>
+                      <Button type={'link'} onClick={() => handleNavigate(AuthPageContainerTypes.Register)}>Зарегестрироваться</Button>
                 </div>
                 }
             </div>

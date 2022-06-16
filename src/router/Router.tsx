@@ -4,25 +4,42 @@ import {TimelinePage} from "../pages/TimelinePage/TimelinePage";
 import {ProfilePage} from "../pages/ProfilePage/ProfilePage";
 import {AuthPage } from "../pages/AuthPage/AuthPage";
 import {MainPage} from "../pages/MainPage/MainPage";
+import {Layout} from "../layouts/Layout/Layout";
 
 export const Router = () => {
   return (
     <Routes>
       <Route
         index
-        element={<TimelinePage />}
+        element={
+          <Layout disableHeader>
+            <MainPage />
+          </Layout>
+        }
+      />
+      <Route
+        path={'timeline'}
+        element={
+          <Layout>
+            <TimelinePage />
+          </Layout>
+        }
       />
       <Route
         path={'/profile'}
-        element={<ProfilePage />}
+        element={
+          <Layout>
+            <ProfilePage />
+          </Layout>
+        }
       />
       <Route
           path={'/auth'}
-          element = {<AuthPage />}
-      />
-      <Route
-          path={'/mainPage'}
-          element={<MainPage />}
+          element = {
+            <Layout disableHeader>
+              <AuthPage />
+            </Layout>
+          }
       />
     </Routes>
   )
