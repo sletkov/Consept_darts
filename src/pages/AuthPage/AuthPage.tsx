@@ -5,6 +5,7 @@ import {RegisterContainer} from "./components/RegisterContainer";
 import {useDispatch} from "react-redux";
 import {login} from "../../store/actions/authActions";
 import {useNavigate} from "react-router-dom";
+import './AuthPage.scss'
 
 export const AuthPage = () => {
 
@@ -20,9 +21,9 @@ export const AuthPage = () => {
 
   return (
     <div className={'auth-page'}>
-      <div className="auth-page__container__title">
+      <h1 className="auth-page__container__title">
         {AuthPageContainerTypes.Login ? 'Войти' : 'Зарегестрироваться'}
-      </div>
+      </h1>
       <div className="auth-page__container">
         {currentContainer === AuthPageContainerTypes.Login ?
           <LoginContainer

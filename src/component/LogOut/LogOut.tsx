@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {Navigate} from "react-router-dom";
-import {logOut} from "../../store/actions/authActions";
+import {logout} from "../../store/actions/authActions";
 
 export const LogOut = () => {
     const dispatch = useDispatch()
@@ -11,7 +11,7 @@ export const LogOut = () => {
     },[])
 
     const logOute = () => {
-        dispatch(logOut())
+        dispatch(logout())
     }
     return (
         <Navigate to={'/'}/>

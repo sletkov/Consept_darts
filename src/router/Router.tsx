@@ -2,7 +2,8 @@ import React from "react";
 import {Route, Routes} from "react-router-dom";
 import {TimelinePage} from "../pages/TimelinePage/TimelinePage";
 import {ProfilePage} from "../pages/ProfilePage/ProfilePage";
-import { AuthPage } from "../pages/AuthPage/AuthPage";
+import {AuthPage } from "../pages/AuthPage/AuthPage";
+import {MainPage} from "../pages/MainPage/MainPage";
 
 export const Router = () => {
   return (
@@ -18,6 +19,10 @@ export const Router = () => {
       <Route
           path={'/auth'}
           element = {<AuthPage />}
+      />
+      <Route
+          path={'/mainPage'}
+          element={<MainPage />}
       />
     </Routes>
   )

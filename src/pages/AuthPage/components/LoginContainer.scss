@@ -1,0 +1,26 @@
+.loginContainer {
+  &__needRegistration {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    span {
+      color:#1890ff;
+      cursor: pointer;
+      &:hover {
+        color: #0067c5;
+      }
+    }
+  }
+}
+.login-form {
+  width: 400px;
+}
+.login-form-forgot {
+  float: right;
+}
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+.login-form-button {
+  width: 100%;
+}

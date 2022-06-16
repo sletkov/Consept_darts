@@ -1,0 +1,16 @@
+.registerContainer {
+  &__avatar {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+  }
+}
+.ant-form#register {
+  width: 550px;
+}
+
+//.ant-upload.ant-upload-select {
+//
+//}

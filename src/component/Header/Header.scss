@@ -8,8 +8,13 @@
     justify-content: space-around;
     align-items: center;
   }
+  &__link {
+    display: flex;
+  }
+  &__menu {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
-.ant-btn {
-  margin-right: 10px;
-}
