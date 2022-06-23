@@ -15,13 +15,13 @@ export const MainPage = () => {
 
     return (
         <div className={'mainPage'}>
-            <h2>CONCEPT DARTS</h2>
-            <h1>Добро пожаловать!</h1>
+            <h2 className='mainPage__title'>CONCEPT DARTS</h2>
+            <h1 className='mainPage__subtitle'>Добро пожаловать!</h1>
             <div className={'mainPage_btn'}>
                 <Button block onClick={() => handleNavigate(AuthPageContainerTypes.Login)}>Войти</Button>
                 <Button block onClick={() => handleNavigate(AuthPageContainerTypes.Register)}>Зарегестрироваться</Button>
                 <Button type="link" block>
-                    <NavLink to={'/'}>Продолжить как гость</NavLink>
+                    <NavLink to={'/timeline'}>Продолжить как гость</NavLink>
                 </Button>
             </div>
 

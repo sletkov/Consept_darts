@@ -2,3 +2,7 @@ export const FETCH_WORLDS = 'FETCH_WORLDS';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const AUTH_LOGOUT = 'AUTH_LOGOUT'
+export const FETCH_USER = 'FETCH_USER'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
+export const LOADFILE_SUCCESS = 'LOADFILE_SUCCESS'
+export const FETCH_WORLD_ID = 'FETCH_WORLD_ID'

@@ -1,13 +1,27 @@
 .mainPage {
-  margin-top: 60px;
   display: flex;
-  justify-items: center;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
+  height: 100vh;
   &__btn {
     width: 300px;
   }
+  &__title {
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 23px;
+    margin-bottom: 30px;
+  }
+  &__subtitle {
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 35px;
+    text-shadow: 0 5px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 40px;
+  }
 }
+
 
 .ant-btn.ant-btn-block {
   margin-bottom: 20px;

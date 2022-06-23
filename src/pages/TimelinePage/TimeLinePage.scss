@@ -1,6 +1,16 @@
 .TimeLinePage {
+  padding: 0 40px;
   &__cardList {
     display: flex;
     justify-content: space-around;
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.05em;
+  }
+  &__container {
+    margin-top: 40px;
   }
 }

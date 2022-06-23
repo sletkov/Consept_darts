@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Avatar,
     Button, DatePicker,
@@ -8,8 +8,11 @@ import {
 } from 'antd';
 import './RegisterContainer.scss'
 import {UserOutlined, UploadOutlined} from "@ant-design/icons";
+import {useDispatch} from "react-redux";
+import {RegisterContainerType} from "../types";
+// import {UploadFile} from "antd/es/upload/interface";
 
-const { Option } = Select;
+// const { Option } = Select;
 
 const formItemLayout = {
     labelCol: {
@@ -33,21 +36,27 @@ const tailFormItemLayout = {
         },
     },
 };
-
-
-const normFile = (e: any) => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-        return e;
-    }
-    return e?.fileList;
-};
+//
+// const normFile = (e: any) => {
+//     console.log('Upload event:', e);
+//     if (Array.isArray(e)) {
+//         return e;
+//     }
+//     return e?.fileList;
+//
+// };
 
 const config = {
-    rules: [{ type: 'object' as const, required: true, message: 'Please select time!' }],
+    rules: [{ type: 'object' as const, required: true, message: 'Пожалуйста, выберите время!' }],
 };
 
-export const RegisterContainer = () => {
+
+
+export const RegisterContainer = ({
+   onSubmit,
+}: RegisterContainerType) => {
+
+
     const [form] = Form.useForm();
 
     const onFinish = (values: any) => {
@@ -58,39 +67,33 @@ export const RegisterContainer = () => {
         console.log('Received values of form: ', value);
     };
 
-    const prefixSelector = (
-        <Form.Item name="prefix" noStyle>
-            <Select style={{ width: 70 }}>
-                <Option value="7">+7</Option>
-                <Option value="8">8</Option>
-            </Select>
-        </Form.Item>
-    );
-
     return (
         <div className={'registerContainer'}>
             <Form
                 {...formItemLayout}
                 form={form}
                 name="register"
-                onFinish={onFinish}
+                onFinish={onSubmit}
                 initialValues={{
-                    prefix: '7',
+                    avatar_image: null,
                 }}
                 scrollToFirstError
             >
                 <div className={'registerContainer__avatar'}>
-                    <Avatar size={90} icon={<UserOutlined />}  style={{ marginBottom: 20 }} />
                     <Form.Item
-                        name="upload"
-                        // label="Upload"
-                        valuePropName="fileList"
-                        getValueFromEvent={normFile}
+                        name = 'avatar_image'
                     >
-                        <Upload name="logo" action="/upload.do" listType="picture">
-                            <Button icon={<UploadOutlined />}>Загрузить фото</Button>
-                        </Upload>
+                        <Avatar size={90} icon={<UserOutlined />}  style={{ marginBottom: 20 }} />
                     </Form.Item>
+                    {/*<Form.Item*/}
+                    {/*    name="upload"*/}
+                    {/*    valuePropName="fileList"*/}
+                    {/*    getValueFromEvent={normFile}*/}
+                    {/*>*/}
+                    {/*    /!*<Upload name="avatar_image" action="/upload.do" listType="picture" beforeUpload={beforeUpload}>*!/*/}
+                    {/*    /!*    <Button icon={<UploadOutlined />}>Загрузить фото</Button>*!/*/}
+                    {/*    /!*</Upload>*!/*/}
+                    {/*</Form.Item>*/}
                 </div>
 
                 <Form.Item
@@ -158,7 +161,7 @@ export const RegisterContainer = () => {
                             message: 'Пожалуйста, введите ваш номер телефона!',
                         }]}
                 >
-                    <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+                    <Input style={{ width: '100%' }} />
                 </Form.Item>
 
                 <Form.Item

@@ -3,11 +3,14 @@ import {Button, Form, Input} from "antd";
 import {LockOutlined, UserOutlined} from "@ant-design/icons";
 import {AuthContainerType, AuthPageContainerTypes} from "../types";
 import './LoginContainer.scss'
+import {useSelector} from "react-redux";
 
 export const LoginContainer = ({
  onSubmit,
- onChangePage
+ onChangePage,
 }: AuthContainerType) => {
+
+  const error = useSelector((state: any) => state.authReducer.error)
 
   return (
       <div className={'loginContainer'}>
@@ -50,6 +53,10 @@ export const LoginContainer = ({
             </div>
           </Form.Item>
         </Form>
+
+          <div>
+              {error}
+          </div>
       </div>
   )
 }
