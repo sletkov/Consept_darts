@@ -40,8 +40,7 @@ export const AddWorldModal = ({
                 <div className="modal-header">
                     <h3 className="modal-title">Создание мира</h3>
                     <span className="modal-close" onClick={onClose}>
-            &times;
-          </span>
+            &times;</span>
                 </div>
                 <div className="modal-body">
                     <div className="modal-content">

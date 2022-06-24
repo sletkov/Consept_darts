@@ -82,10 +82,6 @@ export const ParticipantsModal = ({
 
                     {/*</div>*/}
                 </div>
-                {/*<div className="modal-footer">*/}
-                {/*    <Button type={'primary'}>Создать</Button>*/}
-                {/*    <Button type={'primary'}>Отменить</Button>*/}
-                {/*</div>*/}
             </div>
         </div>
     );

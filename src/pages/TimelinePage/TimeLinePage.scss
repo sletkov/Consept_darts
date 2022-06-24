@@ -1,16 +1,31 @@
 .TimeLinePage {
   padding: 0 40px;
   &__cardList {
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 20px;
   }
   &__title {
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
     letter-spacing: 0.05em;
+    margin-bottom: 20px;
   }
   &__container {
     margin-top: 40px;
   }
 }
+
+.ant-card {
+  border: 1px solid black;
+  overflow: hidden;
+  max-height: 300px;
+  img {
+    object-fit: fill;
+    width:auto;
+    max-height:300px;
+  }
+}
+
+

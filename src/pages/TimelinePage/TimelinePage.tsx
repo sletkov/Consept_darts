@@ -29,8 +29,8 @@ export const TimelinePage = () => {
                 <div className='TimeLinePage__title'>Недавно посещали</div>
                 <div className='TimeLinePage__cardList'>
                     {worlds?.map((item: any, index: number) => (
-                        <Card title={item.name} key={index} onClick={() => handleSubmit(item)}>
-                            <img src={item.map_image} alt="photo"/>
+                        <Card title={item.name} key={index} onClick={() => handleSubmit(item)} className='TimeLinePage__card'>
+                            <img src={item.cover_image} alt="photo"/>
                         </Card>
                     ))}
                 </div>
@@ -40,8 +40,8 @@ export const TimelinePage = () => {
                 <div className='TimeLinePage__title'>Популярные</div>
                 <div className='TimeLinePage__cardList'>
                     {worlds.map((item: any, index: number) => (
-                        <Card title={item.name} key={index} onClick={() => handleSubmit(item)}>
-                            <img src={item.map_image} alt="photo"/>
+                        <Card title={item.name} key={index} onClick={() => handleSubmit(item)} className='TimeLinePage__card'>
+                            <img src={item.cover_image} alt="photo"/>
                         </Card>
                     ))}
                 </div>

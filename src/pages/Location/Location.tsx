@@ -2,25 +2,30 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchWorldId} from "../../store/actions/worldActions";
-import {Button} from "antd";
+import {Button, Card} from "antd";
 import './Location.scss'
 import {LeftOutlined , TeamOutlined, DownOutlined} from '@ant-design/icons';
 import {ParticipantsModal} from "../../component/ParticipantsModal/ParticipantsModal";
+import {LocationModal} from "../../component/LocationModal/LocationModal";
 
 
 export const Location = () => {
 
     const [isModal, setModal] = useState(false);
+    const [isLocationModal, setLocationModal] = useState({
+        visible: false,
+        location:[]
+    })
 
     const dispatch: any = useDispatch()
     const navigate = useNavigate()
 
     const {name, description, locations} = useSelector((state: any) => state.worldReducer.World)
-    console.log(locations)
 
     useEffect(() => {
         fetchdata()
     }, [])
+
 
     const params = useParams()
     const paramsID = params.id
@@ -32,6 +37,19 @@ export const Location = () => {
     const handleNavigate = () => {
         navigate(-1)
     }
+
+    // const handleSubmitModal = (item: any) => {
+    //     console.log(item)
+    //     setLocationModal(true)
+    //     return (
+    //         <LocationModal
+    //             isVisible={isLocationModal}
+    //             onClose={() => setLocationModal(false)}
+    //             location={item}
+    //         />
+    //     )
+    // }
+
 
     return (
         <div className='Location'>
@@ -54,19 +72,25 @@ export const Location = () => {
                     onClose={() => setModal(false)}
                 />
             </div>
-            <div className='Location__filter'>
-                Фильтры
-                <DownOutlined />
-            </div>
             <div className='Location__container'>
-                <img src="https://www.imgonline.com.ua/examples/bee-on-daisy.jpg" alt="фото"/>
-                <img src="https://www.imgonline.com.ua/examples/bee-on-daisy.jpg" alt="фото"/>
-                <img src="https://www.imgonline.com.ua/examples/bee-on-daisy.jpg" alt="фото"/>
-                <img src="https://www.imgonline.com.ua/examples/bee-on-daisy.jpg" alt="фото"/>
-                <img src="https://www.imgonline.com.ua/examples/bee-on-daisy.jpg" alt="фото"/>
-                <img src="https://www.imgonline.com.ua/examples/bee-on-daisy.jpg" alt="фото"/>
-                <img src="https://www.imgonline.com.ua/examples/bee-on-daisy.jpg" alt="фото"/>
-                <img src="https://www.imgonline.com.ua/examples/bee-on-daisy.jpg" alt="фото"/>
+                {locations?.map((item: any, index: any) => (
+                    <div>
+                        <Card title={item.name} key={index} onClick={() => setLocationModal({
+                            visible: true,
+                            location: item
+                        })}>
+                            <img src={item.images[0].image} alt="photo"/>
+                        </Card>
+
+                    </div>
+                ))}
+                <LocationModal
+                    modalProps={isLocationModal}
+                    onClose={() => setLocationModal({
+                        visible: false,
+                        location: []
+                    })}
+                />
             </div>
 
         </div>
