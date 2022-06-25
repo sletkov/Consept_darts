@@ -21,18 +21,22 @@ export const TimelinePage = () => {
 
     const handleSubmit = (world:any) => {
         navigate(`/world/${world.id}`)
+        console.log(world)
+        localStorage.setItem('world',world.id )
     }
+    const lastVisited = localStorage.getItem('world')
+    const lastWorld = worlds.filter((item: any) => item.id === lastVisited)
+    console.log(lastWorld)
 
     return (
         <div className='TimeLinePage'>
             <div className='TimeLinePage__container'>
                 <div className='TimeLinePage__title'>Недавно посещали</div>
                 <div className='TimeLinePage__cardList'>
-                    {worlds?.map((item: any, index: number) => (
-                        <Card title={item.name} key={index} onClick={() => handleSubmit(item)} className='TimeLinePage__card'>
-                            <img src={item.cover_image} alt="photo"/>
-                        </Card>
-                    ))}
+                    <Card title={lastWorld.name} onClick={() => handleSubmit(lastWorld)} className='TimeLinePage__card'>
+                        <img src={lastWorld.cover_image} alt="photo"/>
+                    </Card>
+
                 </div>
             </div>
 

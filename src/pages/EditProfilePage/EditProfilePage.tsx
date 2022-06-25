@@ -1,7 +1,7 @@
 import React from 'react';
 import './EditProfilePage.scss'
 import {Avatar, Button, Form, Input} from "antd";
-import {UserOutlined} from "@ant-design/icons";
+import {LeftOutlined, UserOutlined} from "@ant-design/icons";
 import { Checkbox } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import {useNavigate} from "react-router-dom";
@@ -54,7 +54,7 @@ export const EditProfilePage = () => {
     return (
         <div className={'EditProfilePage'}>
             <div className={'EditProfilePage__back'}>
-                <Button type={'primary'} onClick={()=> handleNavigate()}>
+                <Button onClick={handleNavigate} icon={<LeftOutlined />} >
                     Назад
                 </Button>
                 <Button type={'primary'} onClick={()=> handleNavigate()}>

@@ -7,9 +7,14 @@ import {useNavigate} from "react-router-dom";
 import addWorld from './AddWorld.png'
 import {AddWorldModal} from "../../component/AddWorldModal/AddWorldModal"
 import {LeftOutlined} from "@ant-design/icons";
+import { Checkbox } from 'antd';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+
 export const Publication = () => {
 
     const [isModal, setModal] = useState(false);
+    const [disabled, setDisabled] = useState(false);
+    const [world, setWorlds] = useState({})
 
 
     const navigate = useNavigate()
@@ -29,6 +34,13 @@ export const Publication = () => {
         dispatch(fetchWorlds())
     }
 
+    const onChange = (item:any) => {
+        setWorlds(item)
+        console.log(item);
+        // setDisabled(!disabled);
+    };
+    console.log(world)
+
     return (
         <div className={'Publication'}>
             <Button onClick={handleNavigate} icon={<LeftOutlined />} >
@@ -39,8 +51,14 @@ export const Publication = () => {
                 <div className='Publication__title'>Выберите мир для публикации</div>
                 <div className='Publication__cardList'>
                     {worlds?.map((item: any, index: number) => (
-                        <Card title={item.name} key={index}>
-                            <img src={item.cover_image} alt="photo"/>
+                        <Card
+                            title={item.name}
+                            key={index}
+                            className='Publication__cardlist__card'
+                            extra={<Checkbox onChange={() => onChange(item)} className='Publication__cardlist__checkbox'></Checkbox>}
+                        >
+                            <img src={item.cover_image} alt="photo" />
+
                         </Card>
                     ))}
                     <Card title='Создать новый мир' onClick={() => setModal(true)} >
@@ -69,9 +87,14 @@ export const Publication = () => {
             </div>
             <div className='Publication__wrapper'>
                 <div className='Publication__title'>Выберите точку на карте мира</div>
+                {world
+                    ?
                 <div className='Publication__cardList'>
-                    <img src="https://i0.wp.com/img-fotki.yandex.ru/get/9306/44938346.5f/0_b042d_bbebdf22_orig.jpg" alt="карта"/>
+                    {/*<img src={world?.map_image} alt="карта"/>*/}
                 </div>
+                    : null
+                }
+
             </div>
             <Button type={'primary'} className='Publication__post'>Опубликовать</Button>
         </div>

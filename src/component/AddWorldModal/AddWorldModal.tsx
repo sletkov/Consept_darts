@@ -48,6 +48,10 @@ export const AddWorldModal = ({
                         <div>Выберите карту мира</div>
                     </div>
                     <div className="modal-content">
+                        <img src="#" alt="photo"/>
+                        <div>Выберите картинку для мира</div>
+                    </div>
+                    <div className="modal-content">
                         <Form {...layout}  onFinish={onFinish} >
                             <Form.Item
                                 name="website"
