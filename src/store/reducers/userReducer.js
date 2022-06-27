@@ -1,7 +1,7 @@
 import {FETCH_USER} from "../actions/actionTypes";
 
 const initialState = {
-    user: []
+    user: [],
 }
 
 export default function userReducer(state = initialState, action) {

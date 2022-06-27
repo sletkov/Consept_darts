@@ -9,7 +9,7 @@ import {
 import './RegisterContainer.scss'
 import {UserOutlined, UploadOutlined} from "@ant-design/icons";
 import {useDispatch} from "react-redux";
-import {RegisterContainerType} from "../types";
+import {AuthPageContainerTypes, RegisterContainerType} from "../types";
 // import {UploadFile} from "antd/es/upload/interface";
 
 // const { Option } = Select;
@@ -47,13 +47,14 @@ const tailFormItemLayout = {
 // };
 
 const config = {
-    rules: [{ type: 'object' as const, required: true, message: 'Пожалуйста, выберите время!' }],
+    rules: [{ type: 'object' as const, message: 'Пожалуйста, выберите время!' }],
 };
 
 
 
 export const RegisterContainer = ({
    onSubmit,
+    // onChangePage
 }: RegisterContainerType) => {
 
 
@@ -74,30 +75,19 @@ export const RegisterContainer = ({
                 form={form}
                 name="register"
                 onFinish={onSubmit}
-                initialValues={{
-                    avatar_image: null,
-                }}
                 scrollToFirstError
             >
                 <div className={'registerContainer__avatar'}>
-                    <Form.Item
-                        name = 'avatar_image'
-                    >
-                        <Avatar size={90} icon={<UserOutlined />}  style={{ marginBottom: 20 }} />
-                    </Form.Item>
+                    <Avatar size={90} icon={<UserOutlined />}  style={{ marginBottom: 20 }} />
+
                     {/*<Form.Item*/}
-                    {/*    name="upload"*/}
-                    {/*    valuePropName="fileList"*/}
-                    {/*    getValueFromEvent={normFile}*/}
+                    {/*    name = 'avatar_image'*/}
                     {/*>*/}
-                    {/*    /!*<Upload name="avatar_image" action="/upload.do" listType="picture" beforeUpload={beforeUpload}>*!/*/}
-                    {/*    /!*    <Button icon={<UploadOutlined />}>Загрузить фото</Button>*!/*/}
-                    {/*    /!*</Upload>*!/*/}
                     {/*</Form.Item>*/}
                 </div>
 
                 <Form.Item
-                    name="additional_name"
+                    name="first_name"
                     label="Фамилия"
                     rules={[
                         {
@@ -111,7 +101,7 @@ export const RegisterContainer = ({
                 </Form.Item>
 
                 <Form.Item
-                    name="first_name"
+                    name="last_name"
                     label="Имя"
                     rules={[
                         {
@@ -125,12 +115,12 @@ export const RegisterContainer = ({
                 </Form.Item>
 
                 <Form.Item
-                    name="last_name"
+                    name="additional_name"
                     label="Отчество"
                     hasFeedback
                     rules={[
                         {
-                            required: true,
+                            // required: true,
                             message: 'Пожалуйста, введите ваше отчество!',
                         },
                     ]}
@@ -157,7 +147,7 @@ export const RegisterContainer = ({
                     hasFeedback
                     rules={[
                         {
-                            required: true,
+                            // required: true,
                             message: 'Пожалуйста, введите ваш номер телефона!',
                         }]}
                 >
@@ -182,24 +172,12 @@ export const RegisterContainer = ({
                     <Input />
                 </Form.Item>
 
-                <Form.Item name="date_of_birth" label="День рождения" {...config} >
-                    <DatePicker style={{ width: '100%' }}/>
+                <Form.Item
+                    name="date_of_birth"
+                    label="День рождения" {...config}
+                >
+                    <DatePicker style={{ width: '100%' }} format='YYYY-MM-DD'/>
                 </Form.Item>
-
-
-                {/*<Form.Item label="День рождения" style={{ marginBottom: 0 }}>*/}
-                {/*    <Form.Item*/}
-                {/*        name="date_of_birth"*/}
-                {/*        hasFeedback*/}
-                {/*        rules={[{ required: true,*/}
-                {/*            message: 'Пожалуйста, введите вашу дату рождения!',*/}
-                {/*        }]}*/}
-                {/*    >*/}
-                {/*        <Space direction="vertical" style={{ width: '100%' }}>*/}
-                {/*            <DatePicker onChange={onChange} style={{ width: '100%' }} placeholder={'Введите дату'} />*/}
-                {/*        </Space>*/}
-                {/*    </Form.Item>*/}
-                {/*</Form.Item>*/}
 
                 <Form.Item
                     name="password"
@@ -239,7 +217,7 @@ export const RegisterContainer = ({
                 </Form.Item>
 
                 <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" >
                         Регистрация
                     </Button>
                 </Form.Item>

@@ -15,7 +15,6 @@ export const LogOut = () => {
     }
     return (
         <Navigate to={'/'}/>
-
     );
 };
 

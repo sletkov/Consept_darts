@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./Publication.scss";
-import { Button, Card } from "antd";
+import {Button, Card, Form, Input} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchWorlds } from "../../store/actions/wolrdsActions";
 import { useNavigate } from "react-router-dom";
 import addWorld from "./AddWorld.png";
 import { AddWorldModal } from "../../component/AddWorldModal/AddWorldModal";
-import { LeftOutlined } from "@ant-design/icons";
-import { Checkbox, Radio } from "antd";
-import type { CheckboxChangeEvent } from "antd/es/checkbox";
+import {EnvironmentFilled, LeftOutlined} from "@ant-design/icons";
+import {  Radio } from "antd";
+
+const layout = {
+    labelCol: { span: 3},
+    wrapperCol: { span: 8 },
+};
 
 export const Publication = () => {
   const [isModal, setModal] = useState(false);
-  const [disabled, setDisabled] = useState(false);
   const [world, setWorlds] = useState({});
+  const [coord, setcoord] = useState({coord_x: 0, coord_y: 0})
 
   const navigate = useNavigate();
 
@@ -35,11 +39,38 @@ export const Publication = () => {
   const onChange = (item: any) => {
     setWorlds(item);
     console.log(item);
-    // setDisabled(!disabled);
   };
-  console.log(world);
 
-  return (
+  const relativeCoords = (event:any) => {
+      const bounds = event.target.getBoundingClientRect();
+      const x = event.clientX - bounds.left;
+      const y = event.clientY - bounds.top;
+
+      const img = document.getElementById('relativeCoords')
+      const imgWeight = img?.clientHeight
+      const imgHeight = img?.clientWidth
+      // 16*100/800 x*100/imgHeight = %
+
+      // @ts-ignore
+      const coord_y = (y*100)/imgWeight //высота
+
+      // @ts-ignore
+      const coord_x = (x*100)/imgHeight //ширина
+      setcoord({coord_x:coord_x, coord_y: coord_y
+  })
+      console.log("размер карты", imgHeight, imgWeight , 'координаты куда нажала', x, y,'координаты точки',coord_x,coord_y)
+      return (
+          <div className='Publication__dot' style={{
+              top: `${coord_y}%`,
+              left: `${coord_x}%`
+          }}
+          >
+              <EnvironmentFilled style={{fontSize: 30, color: '#00e1ff'}}  />
+          </div>
+      )
+  }
+
+    return (
     <div className={"Publication"}>
       <Button onClick={handleNavigate} icon={<LeftOutlined />}>
         Назад
@@ -47,8 +78,8 @@ export const Publication = () => {
 
       <div className="Publication__wrapper">
         <div className="Publication__title">Выберите мир для публикации</div>
-        <div className="Publication__cardList">
-          <Radio.Group>
+        <div>
+          <Radio.Group className="Publication__cardList"  style={{ marginBottom: 40, display: "grid" }}>
             {worlds?.map((item: any, index: number) => (
               <Card
                 title={item.name}
@@ -66,14 +97,38 @@ export const Publication = () => {
               </Card>
             ))}
           </Radio.Group>
+            <div className="Publication__title">Или создайте новый мир</div>
           <Card title="Создать новый мир" onClick={() => setModal(true)}>
             <img src={addWorld} alt="photo" />
           </Card>
         </div>
       </div>
+
+
+        <div className="Publication__wrapper">
+            <Form {...layout} >
+                <Form.Item
+                    name="website"
+                    rules={[{ required: true, message: 'Пожалуйста, введите название локации!' }]}
+                >
+                    <div> Название локации </div>
+                    <Input  placeholder="Пожалуйста, введите название локации" />
+                </Form.Item>
+
+                <Form.Item
+                    name="intro"
+                    rules={[{ required: true, message: 'Пожалуйста, введите описание локации!'}]}
+                >
+                    <div> Описание локации </div>
+                    <Input.TextArea  maxLength={100} placeholder="Пожалуйста, введите описание локации" />
+                </Form.Item>
+            </Form>
+        </div>
+
+
+
       <AddWorldModal
         isVisible={isModal}
-        // footer={<button>Cancel</button>}
         onClose={() => setModal(false)}
       />
       <div className="Publication__wrapper">
@@ -88,8 +143,17 @@ export const Publication = () => {
       <div className="Publication__wrapper">
         <div className="Publication__title">Выберите точку на карте мира</div>
         {world ? (
-          <div className="Publication__cardList">
-            <img src={(world as any)?.map_image} alt="карта" />
+          <div className="Publication__img"  onClick={relativeCoords}>
+            <img src={(world as any)?.map_image} alt="карта" id='relativeCoords'  />
+              <div className='Publication__dot' style={{
+                  top: `calc(${coord.coord_y}% - 30px)`,
+                  left: `calc(${coord.coord_x}% - 15px)`
+              }}
+              >
+                  {coord.coord_x !== 0 &&
+                  <EnvironmentFilled style={{fontSize: 30, color: '#00e1ff'}}  />
+                  }
+              </div>
           </div>
         ) : null}
       </div>

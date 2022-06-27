@@ -74,7 +74,7 @@ export const Router = () => {
         <Route
             path={'/world/:id/locations'}
             element={
-                <Layout disableHeader>
+                <Layout >
                     <Location />
                 </Layout>
             }

@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Form, Input } from "antd";
+import React, {useEffect} from "react";
+import { Button, Form, Input, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { AuthContainerType, AuthPageContainerTypes } from "../types";
 import "./LoginContainer.scss";
@@ -9,6 +9,7 @@ export const LoginContainer = ({
   onSubmit,
   onChangePage,
 }: AuthContainerType) => {
+
   const error = useSelector((state: any) => state.authReducer.error);
 
   return (
@@ -53,14 +54,14 @@ export const LoginContainer = ({
           </Button>
           <div className={"loginContainer__needRegistration"}>
             Еще нет аккаунта?{" "}
-            <div onClick={() => onChangePage(AuthPageContainerTypes.Register)}>
+            <div onClick={() => onChangePage(AuthPageContainerTypes.Register)} >
               <span>Зарегистрируйтесь!</span>
             </div>
           </div>
         </Form.Item>
       </Form>
 
-      <div>{error}</div>
+      {error}
     </div>
   );
 };

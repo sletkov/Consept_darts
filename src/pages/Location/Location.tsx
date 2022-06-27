@@ -7,6 +7,7 @@ import './Location.scss'
 import {LeftOutlined , TeamOutlined, DownOutlined} from '@ant-design/icons';
 import {ParticipantsModal} from "../../component/ParticipantsModal/ParticipantsModal";
 import {LocationModal} from "../../component/LocationModal/LocationModal";
+import {instance} from "../../services/instance";
 
 
 export const Location = () => {
@@ -14,16 +15,29 @@ export const Location = () => {
     const [isModal, setModal] = useState(false);
     const [isLocationModal, setLocationModal] = useState({
         visible: false,
-        location:[]
+        location:[],
+        userid:''
     })
 
     const dispatch: any = useDispatch()
     const navigate = useNavigate()
-
     const {name, description, locations} = useSelector((state: any) => state.worldReducer.World)
 
+    const responsedata = async () => {
+        const response = await instance.get("/users/me", {
+            headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        })
+        const userdata = response.data
+        setLocationModal({
+            ...isLocationModal,
+            userid: userdata?.id
+        })
+    }
+
+
     useEffect(() => {
-        fetchdata()
+        fetchdata();
+        responsedata()
     }, [])
 
 
@@ -37,18 +51,6 @@ export const Location = () => {
     const handleNavigate = () => {
         navigate(-1)
     }
-
-    // const handleSubmitModal = (item: any) => {
-    //     console.log(item)
-    //     setLocationModal(true)
-    //     return (
-    //         <LocationModal
-    //             isVisible={isLocationModal}
-    //             onClose={() => setLocationModal(false)}
-    //             location={item}
-    //         />
-    //     )
-    // }
 
 
     return (
@@ -76,8 +78,9 @@ export const Location = () => {
                 {locations?.map((item: any, index: any) => (
                     <div>
                         <Card title={item.name} key={index} onClick={() => setLocationModal({
+                            ...isLocationModal,
                             visible: true,
-                            location: item
+                            location: item,
                         })}>
                             <img src={item.images[0].image} alt="photo"/>
                         </Card>
@@ -87,6 +90,7 @@ export const Location = () => {
                 <LocationModal
                     modalProps={isLocationModal}
                     onClose={() => setLocationModal({
+                        ...isLocationModal,
                         visible: false,
                         location: []
                     })}

@@ -30,6 +30,7 @@ export const loginError = (error) => {
 
 export const logout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('world')
     return {
         type: AUTH_LOGOUT
     }
@@ -37,9 +38,18 @@ export const logout = () => {
 
 export const register = data => {
     return async dispatch => {
+        console.log(data)
         try {
-            const response = await instance.post('/auth/register', dataToRequestBody(data))
-            dispatch(registerSuccess(response.data.id))
+            const response = await instance.post('/auth/register', data)
+            console.log(response.data)
+            const username = response.data.username
+            const password = data.password
+            const newData = {
+                username: username,
+                password: password
+            }
+            console.log('новые данные для логина',newData)
+            dispatch(login(newData))
         } catch (e) {
             console.log(e)
             // dispatch(registerError('Ошибка входа в приложение'))
@@ -48,7 +58,6 @@ export const register = data => {
 }
 
 export const registerSuccess = (id) => {
-    localStorage.setItem('id', id)
     return {
 
     }
@@ -56,23 +65,7 @@ export const registerSuccess = (id) => {
 }
 
 
-// export const LoadFile = (file) => {
-//     return async dispatch => {
-//         try {
-//             const response = await instance.post('/files/upload', file)
-//             dispatch(LoadFileSuccess(response.data))
-//         } catch (e) {
-//             console.log('Невозможно загрузить файл')
-//         }
-//     }
-// }
-//
-// export const LoadFileSuccess = (file) => {
-//     return {
-//         type: LOADFILE_SUCCESS,
-//         file
-//     }
-// }
+
 
 
 

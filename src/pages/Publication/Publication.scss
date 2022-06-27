@@ -1,5 +1,21 @@
 .Publication {
   padding: 40px;
+  &__dot {
+    position: absolute;
+    z-index: 100;
+    cursor: pointer;
+  }
+  &__img {
+    max-width: 60%;
+    max-height: 800px;
+    position: relative;
+
+    img {
+      position: relative;
+      max-width: 100%;
+      max-height: 800px;
+    }
+  }
   &__cardList {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 300px));
@@ -17,8 +33,6 @@
       height: 300px;
       position: relative;
     }
-
-
   }
   &__title {
     font-weight: 700;

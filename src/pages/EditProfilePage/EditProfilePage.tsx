@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./EditProfilePage.scss";
-import { Avatar, Button, Form, Input } from "antd";
+import {Avatar, Button, DatePicker, Form, Input, Modal} from "antd";
 import { LeftOutlined, UserOutlined } from "@ant-design/icons";
-import { Checkbox } from "antd";
-import type { CheckboxChangeEvent } from "antd/es/checkbox";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {Navigate, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {UpdateUser} from "../../store/actions/userActions";
+import {logout} from "../../store/actions/authActions";
+import moment from "moment";
 
 const tailFormItemLayout = {
   wrapperCol: {
@@ -31,25 +32,45 @@ const formItemLayout = {
   },
 };
 
-const onChange = (e: CheckboxChangeEvent) => {
-  console.log(`checked = ${e.target.checked}`);
+const config = {
+  rules: [{ type: 'object' as const, message: 'Пожалуйста, выберите время!' }],
 };
+
+
 
 export const EditProfilePage = () => {
   const navigate = useNavigate();
+  const dispatch: any = useDispatch();
+
 
   const handleNavigate = () => {
     navigate("/profile");
   };
+
   const [form] = Form.useForm();
   const user = useSelector((state: any) => state.userReducer.user);
+  console.log(user)
+
+  // if (values )
 
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
+    console.log(values)
+    dispatch(UpdateUser(values))
+    Modal.success({
+      title: 'Изменения сохранены. ',
+      content: 'Новые данные будут отображаться в профиле.',
+    });
+    setTimeout(() => {
+      navigate(-1)
+    },100)
   };
 
+  const Logout = () => {
+    dispatch(logout())
+    navigate('/')
+  }
+
   if (!user) return <div>Загрузка...</div>;
-  console.log(user);
 
   return (
     <div className={"EditProfilePage"}>
@@ -57,7 +78,7 @@ export const EditProfilePage = () => {
         <Button onClick={handleNavigate} icon={<LeftOutlined />}>
           Назад
         </Button>
-        <Button type={"primary"} onClick={() => handleNavigate()}>
+        <Button type={"primary"} onClick={Logout}>
           Выйти
         </Button>
       </div>
@@ -81,9 +102,7 @@ export const EditProfilePage = () => {
               additional_name: user?.additional_name,
               first_name: user?.first_name,
               last_name: user?.last_name,
-              username: user?.username,
-              email: user?.email,
-              phone_number: user?.phone_number,
+              date_of_birth: moment(user?.date_of_birth, 'YYYY-MM-DD')
             }}
           >
             <Form.Item label="Фамилия" name="additional_name">
@@ -92,27 +111,20 @@ export const EditProfilePage = () => {
             <Form.Item label="Имя" name="first_name">
               <Input />
             </Form.Item>
+
             <Form.Item label="Отчество" name="last_name">
               <Input />
             </Form.Item>
-            <Checkbox onChange={onChange}>
-              Отображать отчество в профиле
-            </Checkbox>
-            <Form.Item label="Имя пользователя" name="username">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Почта" name="email">
-              <Input style={{ width: "100%" }} />
-            </Form.Item>
-            <Checkbox onChange={onChange}>Отображать почту в профиле</Checkbox>
-            <Form.Item label="Номер телефона" name="phone_number">
-              <Input style={{ width: "100%" }} />
-            </Form.Item>
-            <Checkbox onChange={onChange}>
-              Отображать номер телефона в профиле
-            </Checkbox>
+
+            {/*<Form.Item*/}
+            {/*    name="date_of_birth"*/}
+            {/*    label="День рождения" {...config}*/}
+            {/*>*/}
+            {/*  <DatePicker style={{ width: '100%' }} format='YYYY-MM-DD'/>*/}
+            {/*</Form.Item>*/}
+
             <Form.Item {...tailFormItemLayout}>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" >
                 Сохранить
               </Button>
             </Form.Item>

@@ -7,17 +7,18 @@ import {
 import { LoginContainer } from "./components/LoginContainer";
 import { RegisterContainer } from "./components/RegisterContainer";
 import { useDispatch, useSelector } from "react-redux";
-import { login, register } from "../../store/actions/authActions";
+import {login, logout, register} from "../../store/actions/authActions";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./AuthPage.scss";
+import moment from 'moment';
+
 
 export const AuthPage = () => {
   const dispatch: any = useDispatch();
   const navigate = useNavigate();
   const location: any = useLocation();
 
-  const [currentContainer, setCurrentContainer] =
-    useState<AuthPageContainerTypes>(AuthPageContainerTypes.Login);
+  const [currentContainer, setCurrentContainer] = useState<AuthPageContainerTypes>(AuthPageContainerTypes.Login);
   const error = useSelector((state: any) => state.authReducer.error);
 
   useEffect(() => {
@@ -32,7 +33,16 @@ export const AuthPage = () => {
   };
 
   const HandleSubmit = (values: RegisterFormTypes) => {
-    dispatch(register(values));
+
+    const value = {
+      ...values,
+      'date_of_birth': moment(values.date_of_birth).format('YYYY-MM-DD'),
+    }
+    // @ts-ignore
+    delete value['confirm']
+    dispatch(register(value));
+    !error && navigate("/timeline");
+
   };
 
   return (
@@ -49,7 +59,10 @@ export const AuthPage = () => {
             onChangePage={(path) => setCurrentContainer(path)}
           />
         ) : (
-          <RegisterContainer onSubmit={HandleSubmit} />
+          <RegisterContainer
+              onSubmit={HandleSubmit}
+              // onChangePage={(path) => setCurrentContainer(path)}
+          />
         )}
       </div>
     </div>

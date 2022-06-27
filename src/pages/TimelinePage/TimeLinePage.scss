@@ -1,5 +1,5 @@
 .TimeLinePage {
-  padding: 0 40px;
+  padding: 0 40px 40px 40px;
   &__cardList {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
@@ -21,6 +21,8 @@
   border: 1px solid black;
   overflow: hidden;
   max-height: 300px;
+
 }
+
 
 

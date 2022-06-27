@@ -19,14 +19,16 @@ export type RegisterFormTypes = {
   last_name: string,
   additional_name: string,
   avatar_image: string,
-  date_of_birth: string,
+  date_of_birth: any,
   phone_number: string,
   password: string,
   email: string
+  confirm:string
 }
 
 export type RegisterContainerType = {
   onSubmit: (values: RegisterFormTypes) => void,
+  // onChangePage: (path: AuthPageContainerTypes) => void
 }
 
 

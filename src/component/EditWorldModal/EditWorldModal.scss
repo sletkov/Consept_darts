@@ -1,11 +1,11 @@
-.LocationModal {
+.EditWorld {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 9999;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,23 +15,17 @@
   font-weight: 600;
   font-size: 16px;
   line-height: 21px;
-  //&__text {
-  //  width: 70%;
-  //  max-width: 120%;
-  //}
   &__header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    align-items: center;
     &-date {
       font-size: 14px;
     }
   }
-  &__text {
-    width: 100%;
-  }
   &__img {
-    max-width: 50%;
+    max-width: 80%;
     overflow: auto;
     img {
       width: 100%;
@@ -48,7 +42,8 @@
   }
 }
 
-.LocationModal-dialog {
+
+.EditWorld-dialog {
   width: 100%;
   max-width: 800px;
   background: white;
@@ -66,7 +61,7 @@
   animation-duration: 0.5s;
 }
 
-.LocationModal-header {
+.EditWorld-header {
   display: flex;
   align-items: center;
   padding: 1rem;
@@ -74,26 +69,29 @@
   justify-content: space-between;
 }
 
-.LocationModal-close {
+.EditWorld-close {
   cursor: pointer;
   padding: 1rem;
   margin: -1rem -1rem -1rem auto;
 }
 
-.LocationModal-body {
+.EditWorld-body {
   overflow: auto;
   padding: 20px;
   display: flex;
+  flex-direction: column;
   gap: 20px;
+  align-items: center;
 }
 
-.LocationModal-content{
-  width: 100%;
+.EditWorld-content {
+  width: 80%;
 }
 
 textarea.ant-input {
-  min-height: 150px;
+  min-height: 80px;
 }
+
 
 @keyframes appear {
   from {
@@ -112,3 +110,4 @@ textarea.ant-input {
     transform: translateY(0);
   }
 }
+

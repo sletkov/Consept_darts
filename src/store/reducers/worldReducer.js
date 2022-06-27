@@ -1,4 +1,4 @@
-import {FETCH_WORLD_ID} from "../actions/actionTypes";
+import {DELETE_WORLD_SUCCESS, FETCH_WORLD_ID} from "../actions/actionTypes";
 
 const initialState = {
     World: []
@@ -12,7 +12,13 @@ export default function worldReducer(state = initialState, action) {
                 ...state, World: action.world
             }
         }
+        case DELETE_WORLD_SUCCESS: {
+            return {
+                ...state, World: action.data
+            }
+        }
         default:
             return state
     }
 }
+

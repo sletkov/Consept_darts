@@ -6,6 +6,8 @@
 
 .ant-card {
   width: 270px;
+  cursor: pointer;
+
   &-body {
     padding: 0 !important;
     img {
@@ -18,4 +20,24 @@
 
 .ant-card-head-title {
   text-align: center;
+}
+
+.ant-card-bordered {
+  border: 1px solid rgba(157, 157, 157, 0.55) !important;
+  border-radius: 7px !important;
+  &:hover{
+    border: 1px solid rgba(54, 52, 52, 0.68) !important;
+
+  }
+
+}
+
+.ant-btn-default, .ant-btn-primary {
+  border-radius: 6px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+
+  a {
+    font-size: 16px;
+    font-weight: 500;
+  }
 }

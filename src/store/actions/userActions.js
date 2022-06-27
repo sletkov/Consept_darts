@@ -20,3 +20,18 @@ export const fetchUserDataSuccess = (user) => {
     user,
   };
 };
+
+export const UpdateUser = (user) => {
+  return async (dispatch) => {
+    try {
+      const response = await instance.patch("/users/me", user,{
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      console.log(response.data)
+      dispatch(fetchUserDataSuccess(response.data));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
+
